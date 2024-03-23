@@ -10,7 +10,7 @@ import torch
 from tqdm import tqdm
 
 from load_data import Data
-from Model import FHKE
+from Model import FHRE
 from optim import RiemannianAdam, RiemannianSGD
 
 def get_savedir(model, dataset):
@@ -132,7 +132,7 @@ class Experiment:
         train_data_idxs = self.get_data_idxs(d.train_data)
         print("Number of training data points: %d" % len(train_data_idxs))
 
-        model = FHKE(d, self.dim, self.args.max_scale, self.args.max_norm,
+        model = FHRE(d, self.dim, self.args.max_scale, self.args.max_norm,
                         self.args.margin)
         if self.optimizer == 'radam':
             opt = RiemannianAdam(model.parameters(),
@@ -294,7 +294,7 @@ if __name__ == '__main__':
                         nargs="?",
                         help="Embedding dimensionality.")
     parser.add_argument("--model",
-                        default="FHKE",
+                        default="FHRE",
                         help="Knowledge Graph embedding model"
     )
     parser.add_argument('--early_stop', default=10, type=int)
