@@ -4,9 +4,9 @@ import torch.nn as nn
 from geoopt import ManifoldParameter
 from manifolds import Lorentz
 
-class FHKE(torch.nn.Module):
+class FHRE(torch.nn.Module):
     def __init__(self, d, dim, max_scale, max_norm, margin):
-        super(FHKE, self).__init__()
+        super(FHRE, self).__init__()
         self.manifold = Lorentz(max_norm=max_norm)
 
         self.emb_entity = ManifoldParameter(self.manifold.random_normal((len(d.entities), dim), std=1./math.sqrt(dim)), manifold=self.manifold)
